@@ -1,7 +1,6 @@
 // Libs
 import React from "react";
 import { ActionCableConsumer } from "react-actioncable-provider";
-import "./App.css";
 
 function App() {
   return (
