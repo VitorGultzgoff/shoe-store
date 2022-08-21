@@ -31,5 +31,25 @@ module Types
       Product.find(id)
     end
 
+    field :sales, [SaleType], null: true
+    def sales
+      Sale.all.order('created_at DESC')
+    end
+
+    field :total_stores, Integer, null: true
+    def total_stores
+      Store.count
+    end
+
+    field :total_products, Integer, null: true
+    def total_products
+      Product.count
+    end
+
+    field :total_sales, Integer, null: true
+    def total_sales
+      Sale.count
+    end
+
   end
 end

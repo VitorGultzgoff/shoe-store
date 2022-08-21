@@ -29,6 +29,7 @@ class SyncDataJob < ApplicationJob
           else
             ProductInventory.create(store_id: store_created_id, product_id: product_created_id, amount: inventory_amount)
           end
+          Sale.create(store_id: store_created_id, product_id: product_created_id, amount: inventory_amount)
         end
       }
     end
