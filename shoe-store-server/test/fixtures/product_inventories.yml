@@ -2,10 +2,6 @@
 
 one:
   amount: 1
-  store: one
-  product: one
 
 two:
   amount: 1
-  store: two
-  product: two

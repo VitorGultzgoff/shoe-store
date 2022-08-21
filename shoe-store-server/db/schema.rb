@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_20_225715) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_21_131424) do
   create_table "product_inventories", force: :cascade do |t|
-    t.integer "amount"
     t.integer "store_id", null: false
     t.integer "product_id", null: false
+    t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_product_inventories_on_product_id"
@@ -22,11 +22,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_20_225715) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.integer "store_id", null: false
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["store_id"], name: "index_products_on_store_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -37,5 +35,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_20_225715) do
 
   add_foreign_key "product_inventories", "products"
   add_foreign_key "product_inventories", "stores"
-  add_foreign_key "products", "stores"
 end
