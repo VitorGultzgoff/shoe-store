@@ -1,25 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// Libs
+import React from "react";
+import { ActionCableConsumer } from "react-actioncable-provider";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ActionCableConsumer
+      channel="DataBridgeChannel"
+      onReceived={(response) => {
+        console.log("response = ", response);
+      }}
+    >
+      <div className="App">
+        <h1>Shoe Store</h1>
+      </div>
+    </ActionCableConsumer>
   );
 }
 

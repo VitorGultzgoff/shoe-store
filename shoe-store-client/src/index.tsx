@@ -1,15 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+// Libs
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { ActionCableProvider } from "react-actioncable-provider";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+// Constants
+import { ENV_URLS } from "./constants/config";
+
+// Style
+import "./index.css";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <ActionCableProvider url={ENV_URLS.ACTION_CABLE_SERVER}>
+      <App />
+    </ActionCableProvider>
   </React.StrictMode>
 );
 
