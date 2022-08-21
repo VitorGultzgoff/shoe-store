@@ -4,6 +4,12 @@ import ReactDOM from "react-dom/client";
 import { ActionCableProvider } from "react-actioncable-provider";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from "@apollo/client";
 
 // Constants
 import { ENV_URLS } from "./constants/config";
@@ -14,10 +20,22 @@ import "./index.css";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
+const link = createHttpLink({
+  uri: ENV_URLS.GRAPHQL_SERVER,
+});
+
+const client = new ApolloClient({
+  link: link,
+  cache: new InMemoryCache(),
+});
+
 root.render(
   <React.StrictMode>
     <ActionCableProvider url={ENV_URLS.ACTION_CABLE_SERVER}>
-      <App />
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
     </ActionCableProvider>
   </React.StrictMode>
 );
