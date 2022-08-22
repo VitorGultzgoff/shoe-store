@@ -14,17 +14,16 @@ import {
 import { Bell as BellIcon } from "icons/bell";
 import MenuIcon from "@mui/icons-material/Menu";
 
-export const DashboardNavbar = ({ onSidebarOpen }) => {
+export const ApplicationNavbar = ({ onSidebarOpen }) => {
   const theme = useTheme();
-  console.log("theme in navbar = ", theme);
-  const DashboardNavbarRoot = styled(AppBar)(() => ({
+  const ApplicationNavbarRoot = styled(AppBar)(() => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[3],
   }));
 
   return (
     <>
-      <DashboardNavbarRoot
+      <ApplicationNavbarRoot
         sx={{
           left: {
             lg: 280,
@@ -62,7 +61,7 @@ export const DashboardNavbar = ({ onSidebarOpen }) => {
             </IconButton>
           </Tooltip>
         </Toolbar>
-      </DashboardNavbarRoot>
+      </ApplicationNavbarRoot>
     </>
   );
 };

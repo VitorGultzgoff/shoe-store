@@ -10,7 +10,7 @@ import StoreIcon from "@mui/icons-material/Store";
 // Components
 import { NavItem } from "./NavItem";
 
-const items = [
+const navbarItems = [
   {
     href: "/",
     icon: <ChartBarIcon fontSize="small" />,
@@ -22,13 +22,13 @@ const items = [
     title: "Stores",
   },
   {
-    href: "/products",
+    href: "/models",
     icon: <ShoppingBagIcon fontSize="small" />,
-    title: "Products",
+    title: "Models",
   },
 ];
 
-export const DashboardSidebar = ({ open, onClose }) => {
+export const ApplicationSidebar = ({ open, onClose }) => {
   const lgUp = useMediaQuery((theme: Theme) => theme?.breakpoints?.up("lg"), {
     defaultMatches: true,
     noSsr: false,
@@ -65,7 +65,7 @@ export const DashboardSidebar = ({ open, onClose }) => {
           }}
         />
         <Box sx={{ flexGrow: 1 }}>
-          {items.map((item) => (
+          {navbarItems.map((item) => (
             <NavItem
               key={item.title}
               icon={item.icon}

@@ -1,9 +1,10 @@
 // Components
 import { Box, Button, ListItem, useTheme } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 export const NavItem = ({ href, icon, title, ...others }) => {
-  // const active = href ? router.pathname === href : false;
-  const active = false;
+  const { pathname } = useLocation();
+  const active = href ? pathname === href : false;
   const theme = useTheme();
 
   return (
@@ -18,7 +19,7 @@ export const NavItem = ({ href, icon, title, ...others }) => {
       {...others}
     >
       <Button
-        component="a"
+        href={href}
         startIcon={icon}
         disableRipple
         sx={{

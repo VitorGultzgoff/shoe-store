@@ -4,10 +4,10 @@ import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 // Components
-import { DashboardNavbar } from "./DashboardNavbar";
-import { DashboardSidebar } from "./DashboardSidebar";
+import { ApplicationNavbar } from "layouts/ApplicationLayout/components/ApplicationNavbar";
+import { ApplicationSidebar } from "layouts/ApplicationLayout/components/ApplicationSidebar";
 
-const DashboardLayoutRoot = styled("div")(({ theme }) => ({
+const ApplicationLayoutRoot = styled("div")(({ theme }) => ({
   display: "flex",
   flex: "1 1 auto",
   maxWidth: "100%",
@@ -17,13 +17,13 @@ const DashboardLayoutRoot = styled("div")(({ theme }) => ({
   },
 }));
 
-export const DashboardLayout = (props) => {
+export const ApplicationLayout = (props) => {
   const { children } = props;
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 
   return (
     <>
-      <DashboardLayoutRoot>
+      <ApplicationLayoutRoot>
         <Box
           sx={{
             display: "flex",
@@ -34,9 +34,9 @@ export const DashboardLayout = (props) => {
         >
           {children}
         </Box>
-      </DashboardLayoutRoot>
-      <DashboardNavbar onSidebarOpen={() => setSidebarOpen(true)} />
-      <DashboardSidebar
+      </ApplicationLayoutRoot>
+      <ApplicationNavbar onSidebarOpen={() => setSidebarOpen(true)} />
+      <ApplicationSidebar
         onClose={() => setSidebarOpen(false)}
         open={isSidebarOpen}
       />
