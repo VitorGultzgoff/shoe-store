@@ -36,6 +36,11 @@ module Types
       Sale.all.order('created_at DESC')
     end
 
+    field :latest_sales, [SaleType], null: true
+    def latest_sales
+      Sale.limit(10).order('created_at DESC')
+    end
+
     field :total_stores, Integer, null: true
     def total_stores
       Store.count
@@ -49,6 +54,11 @@ module Types
     field :total_sales, Integer, null: true
     def total_sales
       Sale.count
+    end
+
+    field :total_amount_inventory, Integer, null: true
+    def total_amount_inventory
+      ProductInventory.sum("amount")
     end
 
   end
