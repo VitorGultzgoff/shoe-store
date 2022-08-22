@@ -7,13 +7,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // // GraphQL
 // import { GET_ALL_STORES } from "./graphql/queries";
 
-// Components
-import Dashboard from "./components/Dashboard";
-
 // Layouts
 import { ApplicationLayout } from "layouts/ApplicationLayout/ApplicationLayout";
 
 // Pages
+import Dashboard from "./pages/Dashboard";
 import { Models } from "pages/Models";
 import { Stores } from "pages/Stores";
 
