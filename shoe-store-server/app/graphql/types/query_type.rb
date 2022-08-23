@@ -66,5 +66,12 @@ module Types
       ProductInventorySuggestion.all
     end
 
+    field :latest_sales_per_time, GraphQL::Types::JSON, null: true
+    def latest_sales_per_time
+      current_time = Time.now
+      past_20_minutes = Time.now - 20.minute
+      Sale.where(:created_at => past_20_minutes..current_time).group_by_minute(:created_at).order("created_at ASC").count
+    end
+
   end
 end
