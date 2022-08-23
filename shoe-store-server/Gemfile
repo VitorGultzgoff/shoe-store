@@ -54,3 +54,4 @@ gem "redis"
 gem "sidekiq"
 gem 'faye-websocket'
 gem 'eventmachine'
+gem "groupdate"

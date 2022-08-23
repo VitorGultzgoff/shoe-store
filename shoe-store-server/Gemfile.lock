@@ -88,6 +88,8 @@ GEM
       railties
       sprockets-rails
     graphql (2.0.13)
+    groupdate (6.1.0)
+      activesupport (>= 5.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
@@ -200,6 +202,7 @@ DEPENDENCIES
   faye-websocket
   graphiql-rails
   graphql (~> 2.0)
+  groupdate
   listen (>= 3.0.5, < 3.2)
   puma (~> 5.0)
   rack-cors
