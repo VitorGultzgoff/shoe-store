@@ -58,7 +58,7 @@ export const ProductDetails = () => {
   }, [startPollingProductDetailsData, stopPollingProductDetailsData]);
 
   return (
-    <Card>
+    <Card sx={{ my: 4 }}>
       <Box sx={{ ml: 2, my: 2 }}>
         <Breadcrumbs aria-label="breadcrumb">
           <Link underline="hover" color="inherit" href="/models">

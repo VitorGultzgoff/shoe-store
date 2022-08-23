@@ -1,7 +1,6 @@
 // Libs
 import {
   Avatar,
-  Box,
   Card,
   CardContent,
   Grid,
@@ -10,7 +9,6 @@ import {
 } from "@mui/material";
 
 // Icons
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
 
 // Utils
@@ -45,26 +43,6 @@ export const SalesAmount = ({ amount }) => {
             </Avatar>
           </Grid>
         </Grid>
-        <Box
-          sx={{
-            alignItems: "center",
-            display: "flex",
-            pt: 2,
-          }}
-        >
-          <ArrowUpwardIcon sx={{ color: success.main }} />
-          <Typography
-            variant="body2"
-            sx={{
-              mr: 1,
-            }}
-          >
-            7%
-          </Typography>
-          <Typography color={text.secondary} variant="caption">
-            Since last minute
-          </Typography>
-        </Box>
       </CardContent>
     </Card>
   );

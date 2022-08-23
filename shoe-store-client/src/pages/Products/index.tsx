@@ -50,7 +50,7 @@ export const Products = () => {
   }, [startPollingProductsData, stopPollingProductsData]);
 
   return (
-    <Card>
+    <Card sx={{ my: 4 }}>
       <CardHeader title="Models data" />
 
       <NoData

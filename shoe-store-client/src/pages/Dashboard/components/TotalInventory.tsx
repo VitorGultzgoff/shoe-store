@@ -1,7 +1,6 @@
 // Libs
 import {
   Avatar,
-  Box,
   Card,
   CardContent,
   Grid,
@@ -10,7 +9,6 @@ import {
 } from "@mui/material";
 
 // Icons
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import InventoryIcon from "@mui/icons-material/Inventory";
 
 // Utils
@@ -18,7 +16,7 @@ import { formatDecimal } from "utils/format";
 
 export const TotalInventory = ({ amount }) => {
   const {
-    palette: { success, text, warning },
+    palette: { text, warning },
   } = useTheme();
   return (
     <Card>
@@ -44,26 +42,6 @@ export const TotalInventory = ({ amount }) => {
             </Avatar>
           </Grid>
         </Grid>
-        <Box
-          sx={{
-            alignItems: "center",
-            display: "flex",
-            pt: 2,
-          }}
-        >
-          <ArrowUpwardIcon sx={{ color: success.main }} />
-          <Typography
-            variant="body2"
-            sx={{
-              mr: 1,
-            }}
-          >
-            0%
-          </Typography>
-          <Typography color={text.secondary} variant="caption">
-            Since last minute
-          </Typography>
-        </Box>
       </CardContent>
     </Card>
   );

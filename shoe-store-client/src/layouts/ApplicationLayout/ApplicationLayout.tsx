@@ -8,6 +8,7 @@ import { ApplicationNavbar } from "layouts/ApplicationLayout/components/Applicat
 import { ApplicationSidebar } from "layouts/ApplicationLayout/components/ApplicationSidebar";
 
 const ApplicationLayoutRoot = styled("div")(({ theme }) => ({
+  backgroundColor: "#F9FAFC",
   display: "flex",
   flex: "1 1 auto",
   maxWidth: "100%",
