@@ -9,6 +9,7 @@ module Types
     field :inventories, [Types::ProductInventoryType], null: true
     field :sales, [Types::SaleType], null: true
     field :total_of_products, Integer
+    field :total_of_inventories, Integer
     field :total_of_products_low_inventory, Integer
     field :total_of_products_medium_inventory, Integer
     field :total_of_products_high_inventory, Integer
@@ -18,6 +19,10 @@ module Types
 
     def total_of_products
       Product.includes(:inventories).where("inventories.store_id": object[:id]).length
+    end
+
+    def total_of_inventories
+      Product.includes(:inventories).where("inventories.store_id": object[:id]).sum("amount")
     end
 
     def total_of_products_low_inventory
