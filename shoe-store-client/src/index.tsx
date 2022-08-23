@@ -1,7 +1,6 @@
 // Libs
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ActionCableProvider } from "react-actioncable-provider";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import {
@@ -43,19 +42,17 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <ScopedCssBaseline>
-        <ActionCableProvider url={ENV_URLS.ACTION_CABLE_SERVER}>
-          <ApolloProvider client={client}>
-            <UseDashboardProvider>
-              <UseStoresProvider>
-                <UseProductsProvider>
-                  <BrowserRouter>
-                    <App />
-                  </BrowserRouter>
-                </UseProductsProvider>
-              </UseStoresProvider>
-            </UseDashboardProvider>
-          </ApolloProvider>
-        </ActionCableProvider>
+        <ApolloProvider client={client}>
+          <UseDashboardProvider>
+            <UseStoresProvider>
+              <UseProductsProvider>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </UseProductsProvider>
+            </UseStoresProvider>
+          </UseDashboardProvider>
+        </ApolloProvider>
       </ScopedCssBaseline>
     </ThemeProvider>
   </React.StrictMode>

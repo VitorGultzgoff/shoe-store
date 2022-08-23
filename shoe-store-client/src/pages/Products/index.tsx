@@ -1,5 +1,6 @@
 // Libs
-import React from "react";
+import React, { useEffect } from "react";
+import { format } from "date-fns";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {
   Box,
@@ -14,30 +15,69 @@ import {
 } from "@mui/material";
 
 // Components
+import { ContainerLoading } from "components/ContainerLoading";
+import { NoData } from "components/NoData";
 import { TableCellStyled } from "components/TableCellStyled";
 
 // Hooks
 import { useProducts } from "hooks/useProducts";
+
+// Icons
+import UpdateIcon from "@mui/icons-material/Update";
 
 // Utils
 import { formatDecimal, formatPercentage } from "utils/format";
 
 export const Products = () => {
   const theme = useTheme();
-  const { productsData } = useProducts();
-  console.log("productsData = ", productsData);
+  const {
+    loadingProductsData,
+    productsData,
+    updatedTime,
+    startPollingProductsData,
+    stopPollingProductsData,
+  } = useProducts();
+
+  useEffect(() => {
+    startPollingProductsData(100);
+    return function cleanup() {
+      stopPollingProductsData();
+    };
+  }, [startPollingProductsData, stopPollingProductsData]);
+
   return (
     <Card>
       <CardHeader title="Products data" />
-      {(!productsData?.products || productsData?.products.length <= 0) && (
-        <Box sx={{ my: 2, width: "100%", textAlign: "center" }}>
-          <Typography color={theme.palette.text.secondary}>
-            There is not data to display
-          </Typography>
-        </Box>
-      )}
+
+      <NoData
+        show={
+          !loadingProductsData &&
+          (!productsData?.products || productsData?.products.length <= 0)
+        }
+      />
+      <ContainerLoading show={loadingProductsData} />
       {productsData?.products && productsData?.products.length > 0 && (
         <PerfectScrollbar>
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              width: "100%",
+              justifyContent: "center",
+              my: 2,
+            }}
+          >
+            <UpdateIcon
+              fontSize="large"
+              sx={{
+                color: theme.palette.info.main,
+                mr: 1,
+              }}
+            />
+            <Typography color={theme.palette.text.primary}>
+              Updated at {format(updatedTime, "dd/MM - HH:mm:ss")}
+            </Typography>
+          </Box>
           <Box sx={{ minWidth: 800 }}>
             <Table>
               <TableHead>

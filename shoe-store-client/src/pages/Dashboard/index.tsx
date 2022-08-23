@@ -1,4 +1,5 @@
 // Libs
+import { useEffect } from "react";
 import { Box, Container, Grid } from "@mui/material";
 
 // Components
@@ -12,7 +13,16 @@ import { TotalInventory } from "./components/TotalInventory";
 import { useDashboard } from "hooks/useDashboard";
 
 const Dashboard = () => {
-  const { dashboardData } = useDashboard();
+  const { dashboardData, startPollingDashboardData, stopPollingDashboardData } =
+    useDashboard();
+
+  useEffect(() => {
+    startPollingDashboardData(100);
+    return function cleanup() {
+      stopPollingDashboardData();
+    };
+  }, [startPollingDashboardData, stopPollingDashboardData]);
+
   return (
     <Box
       component="main"

@@ -1,5 +1,11 @@
 // Libs
-import React, { createContext, useContext, useMemo } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { FetchMoreOptions, useQuery } from "@apollo/client";
 
 // GraphQL
@@ -12,6 +18,9 @@ interface IStoresContextData {
   storesData: IStoresData;
   loadingStoresData: boolean;
   retrieveStoresData: (fetchOptions: FetchMoreOptions) => void;
+  updatedTime: Date;
+  startPollingStoresData: (pollInterval: number) => void;
+  stopPollingStoresData: () => void;
 }
 
 // Context
@@ -26,19 +35,36 @@ interface IUseStoresProviderProps {
 // Provider
 const UseStoresProvider: React.FC<IUseStoresProviderProps> = ({ children }) => {
   // Context states
+  const [updatedTime, setUpdatedTime] = useState<Date>(new Date());
   const {
     loading: loadingStoresData,
     data: storesData,
     fetchMore: retrieveStoresData,
+    startPolling: startPollingStoresData,
+    stopPolling: stopPollingStoresData,
   } = useQuery(GET_ALL_STORE_VIEW);
+
+  useEffect(() => {
+    setUpdatedTime(new Date());
+  }, [storesData]);
 
   const value = useMemo(
     () => ({
       storesData,
       loadingStoresData,
       retrieveStoresData,
+      updatedTime,
+      startPollingStoresData,
+      stopPollingStoresData,
     }),
-    [storesData, loadingStoresData, retrieveStoresData]
+    [
+      storesData,
+      loadingStoresData,
+      retrieveStoresData,
+      updatedTime,
+      startPollingStoresData,
+      stopPollingStoresData,
+    ]
   );
 
   return (
