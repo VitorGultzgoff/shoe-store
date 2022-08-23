@@ -5,6 +5,6 @@ class ProductInventory < ApplicationRecord
     after_save :retrieve_suggestions
     
     def retrieve_suggestions
-        InventorySuggestionsJob.perform_now
+        InventorySuggestionsJob.set(wait: 3.minute).perform_later
     end
 end
