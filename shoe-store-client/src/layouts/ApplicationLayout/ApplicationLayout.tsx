@@ -19,7 +19,7 @@ const ApplicationLayoutRoot = styled("div")(({ theme }) => ({
 
 export const ApplicationLayout = (props) => {
   const { children } = props;
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <>
