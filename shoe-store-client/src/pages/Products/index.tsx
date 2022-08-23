@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 
 // Components
 import { ContainerLoading } from "components/ContainerLoading";
+import { FlagLabel } from "components/FlagLabel";
 import { NoData } from "components/NoData";
 import { TableCellStyled } from "components/TableCellStyled";
 
@@ -48,11 +49,9 @@ export const Products = () => {
     };
   }, [startPollingProductsData, stopPollingProductsData]);
 
-  console.log("productsData in pages = ", productsData);
-
   return (
     <Card>
-      <CardHeader title="Products data" />
+      <CardHeader title="Models data" />
 
       <NoData
         show={
@@ -122,9 +121,22 @@ export const Products = () => {
                       {formatDecimal(actualProduct.totalOfStores || 0)}
                     </TableCellStyled>
                     <TableCellStyled>
-                      {actualProduct.totalOfStoresLowInventory}/
-                      {actualProduct.totalOfStoresMediumInventory}/
-                      {actualProduct.totalOfStoresHighInventory}
+                      <FlagLabel
+                        color="#fff"
+                        bgColor={theme.palette.error.main}
+                        otherStyles={{ marginRight: 8 }}
+                      >
+                        {actualProduct.totalOfStoresLowInventory}
+                      </FlagLabel>
+                      <FlagLabel
+                        bgColor={theme.palette.grey.A400}
+                        otherStyles={{ marginRight: 8 }}
+                      >
+                        {actualProduct.totalOfStoresMediumInventory}
+                      </FlagLabel>
+                      <FlagLabel bgColor={theme.palette.success.light}>
+                        {actualProduct.totalOfStoresHighInventory}
+                      </FlagLabel>
                     </TableCellStyled>
                   </TableRow>
                 ))}

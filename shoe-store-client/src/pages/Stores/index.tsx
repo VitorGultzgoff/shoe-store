@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 
 // Components
 import { ContainerLoading } from "components/ContainerLoading";
+import { FlagLabel } from "components/FlagLabel";
 import { NoData } from "components/NoData";
 import { TableCellStyled } from "components/TableCellStyled";
 
@@ -117,9 +118,22 @@ export const Stores = () => {
                       {formatDecimal(actualStore.totalOfProducts || 0)}
                     </TableCellStyled>
                     <TableCellStyled>
-                      {actualStore.totalOfProductsLowInventory}/
-                      {actualStore.totalOfProductsMediumInventory}/
-                      {actualStore.totalOfProductsHighInventory}
+                      <FlagLabel
+                        color="#fff"
+                        bgColor={theme.palette.error.main}
+                        otherStyles={{ marginRight: 8 }}
+                      >
+                        {actualStore.totalOfProductsLowInventory}
+                      </FlagLabel>
+                      <FlagLabel
+                        bgColor={theme.palette.grey.A400}
+                        otherStyles={{ marginRight: 8 }}
+                      >
+                        {actualStore.totalOfProductsMediumInventory}
+                      </FlagLabel>
+                      <FlagLabel bgColor={theme.palette.success.light}>
+                        {actualStore.totalOfProductsHighInventory}
+                      </FlagLabel>
                     </TableCellStyled>
                   </TableRow>
                 ))}
