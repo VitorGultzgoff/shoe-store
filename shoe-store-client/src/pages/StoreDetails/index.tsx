@@ -18,8 +18,12 @@ import { useParams } from "react-router-dom";
 
 // Components
 import { ContainerLoading } from "components/ContainerLoading";
+import { FlagLabel } from "components/FlagLabel";
 import { NoData } from "components/NoData";
 import { TableCellStyled } from "components/TableCellStyled";
+
+// Constants
+import { INVENTORY_LEVELS } from "constants/inventory";
 
 // Hooks
 import { useStores } from "hooks/useStores";
@@ -115,7 +119,14 @@ export const StoreDetails = () => {
                             {actualInventory.product?.name}
                           </TableCellStyled>
                           <TableCellStyled>
-                            {formatDecimal(actualInventory.amount) || 0}
+                            <FlagLabel
+                              {...INVENTORY_LEVELS.getStylesByInventoryAmount(
+                                actualInventory.amount,
+                                theme
+                              )}
+                            >
+                              {formatDecimal(actualInventory.amount) || 0}
+                            </FlagLabel>
                           </TableCellStyled>
                         </TableRow>
                       )

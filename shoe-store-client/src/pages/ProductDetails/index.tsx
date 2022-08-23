@@ -29,6 +29,8 @@ import UpdateIcon from "@mui/icons-material/Update";
 
 // Utils
 import { formatDecimal } from "utils/format";
+import { FlagLabel } from "components/FlagLabel";
+import { INVENTORY_LEVELS } from "constants/inventory";
 
 export const ProductDetails = () => {
   const theme = useTheme();
@@ -114,7 +116,14 @@ export const ProductDetails = () => {
                           {actualInventory.store?.name}
                         </TableCellStyled>
                         <TableCellStyled>
-                          {formatDecimal(actualInventory.amount) || 0}
+                          <FlagLabel
+                            {...INVENTORY_LEVELS.getStylesByInventoryAmount(
+                              actualInventory.amount,
+                              theme
+                            )}
+                          >
+                            {formatDecimal(actualInventory.amount) || 0}
+                          </FlagLabel>
                         </TableCellStyled>
                       </TableRow>
                     )
