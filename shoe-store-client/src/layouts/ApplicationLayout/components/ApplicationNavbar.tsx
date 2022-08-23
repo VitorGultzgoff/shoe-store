@@ -1,17 +1,8 @@
 // Libs
 import styled from "@emotion/styled";
-import {
-  AppBar,
-  Badge,
-  Box,
-  IconButton,
-  Toolbar,
-  Tooltip,
-  useTheme,
-} from "@mui/material";
+import { AppBar, IconButton, Toolbar, useTheme } from "@mui/material";
 
 // Icons
-import { Bell as BellIcon } from "icons/bell";
 import MenuIcon from "@mui/icons-material/Menu";
 
 export const ApplicationNavbar = ({ onSidebarOpen }) => {
