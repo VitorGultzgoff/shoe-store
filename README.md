@@ -60,7 +60,7 @@
 3. In the subfolder of server, install the dependencies and start the server
 
 ```
-  cd shore-store-server
+  cd shoe-store-server
   bundle install
   rails db:migrate
   rails s
