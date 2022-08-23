@@ -61,5 +61,10 @@ module Types
       ProductInventory.sum("amount")
     end
 
+    field :product_suggestions, [ProductInventorySuggestionType], null: true
+    def product_suggestions
+      ProductInventorySuggestion.all
+    end
+
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_21_222944) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_23_063453) do
   create_table "product_inventories", force: :cascade do |t|
     t.integer "store_id", null: false
     t.integer "product_id", null: false
@@ -19,6 +19,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_222944) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_product_inventories_on_product_id"
     t.index ["store_id"], name: "index_product_inventories_on_store_id"
+  end
+
+  create_table "product_inventory_suggestions", force: :cascade do |t|
+    t.integer "inv_sugg_src_id"
+    t.integer "inv_sugg_target_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inv_sugg_src_id"], name: "index_product_inventory_suggestions_on_inv_sugg_src_id"
+    t.index ["inv_sugg_target_id"], name: "index_product_inventory_suggestions_on_inv_sugg_target_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -45,6 +54,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_222944) do
 
   add_foreign_key "product_inventories", "products"
   add_foreign_key "product_inventories", "stores"
+  add_foreign_key "product_inventory_suggestions", "product_inventories", column: "inv_sugg_src_id"
+  add_foreign_key "product_inventory_suggestions", "product_inventories", column: "inv_sugg_target_id"
   add_foreign_key "sales", "products"
   add_foreign_key "sales", "stores"
 end
