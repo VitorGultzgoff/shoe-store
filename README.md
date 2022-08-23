@@ -62,6 +62,7 @@
 ```
   cd shore-store-server
   bundle install
+  rails db:migrate
   rails s
 ```
 
