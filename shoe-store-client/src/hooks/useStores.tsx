@@ -42,7 +42,7 @@ interface IUseStoresProviderProps {
 const UseStoresProvider: React.FC<IUseStoresProviderProps> = ({ children }) => {
   // Context states
   const [updatedTime, setUpdatedTime] = useState<Date>(new Date());
-  const [actualStoreId, setActualStoreId] = useState<string>("");
+  const [actualStoreId, setActualStoreId] = useState<string>("1");
   const {
     loading: loadingStoresData,
     data: storesData,

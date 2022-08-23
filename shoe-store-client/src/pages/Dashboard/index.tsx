@@ -23,6 +23,8 @@ const Dashboard = () => {
     };
   }, [startPollingDashboardData, stopPollingDashboardData]);
 
+  console.log("dashboardData in pages = ", dashboardData);
+
   return (
     <Box
       component="main"

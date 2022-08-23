@@ -13,6 +13,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import { ContainerLoading } from "components/ContainerLoading";
@@ -38,12 +39,16 @@ export const Products = () => {
     stopPollingProductsData,
   } = useProducts();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     startPollingProductsData(100);
     return function cleanup() {
       stopPollingProductsData();
     };
   }, [startPollingProductsData, stopPollingProductsData]);
+
+  console.log("productsData in pages = ", productsData);
 
   return (
     <Card>
@@ -93,7 +98,11 @@ export const Products = () => {
               </TableHead>
               <TableBody>
                 {productsData?.products.map((actualProduct) => (
-                  <TableRow hover key={actualProduct.id}>
+                  <TableRow
+                    hover
+                    key={actualProduct.id}
+                    onClick={() => navigate(`/models/${actualProduct.id}`)}
+                  >
                     <TableCellStyled>{actualProduct.name}</TableCellStyled>
                     <TableCellStyled>
                       {formatPercentage(

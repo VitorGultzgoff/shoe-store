@@ -22,3 +22,7 @@ export interface IStoreDetailData {
 export interface IProductsData {
   products: IProductData[];
 }
+
+export interface IProductDetailData {
+  product: IProductData;
+}

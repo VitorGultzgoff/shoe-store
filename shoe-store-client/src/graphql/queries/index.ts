@@ -64,6 +64,23 @@ export const GET_STORE_DATA_BY_ID = gql`
   }
 `;
 
+export const GET_PRODUCT_DATA_BY_ID = gql`
+  query ($product_id: ID!) {
+    product(id: $product_id) {
+      id
+      name
+      inventories {
+        id
+        amount
+        store {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
 export const GET_ALL_PRODUCT_VIEW = gql`
   query {
     products {

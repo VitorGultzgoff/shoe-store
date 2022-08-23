@@ -4,8 +4,9 @@ import { format } from "date-fns";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {
   Box,
+  Breadcrumbs,
   Card,
-  CardHeader,
+  Link,
   Table,
   TableBody,
   TableHead,
@@ -54,70 +55,77 @@ export const StoreDetails = () => {
     };
   }, [startPollingStoreDetailsData, stopPollingStoreDetailsData]);
 
-  console.log("storeDetailsData = ", storeDetailsData);
-
   return (
-    <Card>
-      <CardHeader
-        title={`Shoes Inventory of ${storeDetailsData?.store?.name}`}
-      />
-      <NoData
-        show={
-          !loadingStoreDetailsData &&
-          (!storeDetailsData?.store?.inventories ||
-            storeDetailsData?.store?.inventories.length <= 0)
-        }
-      />
-      <ContainerLoading show={loadingStoreDetailsData} />
-      {storeDetailsData?.store?.inventories &&
-        storeDetailsData?.store?.inventories.length > 0 && (
-          <PerfectScrollbar>
-            <Box
-              sx={{
-                alignItems: "center",
-                display: "flex",
-                width: "100%",
-                justifyContent: "center",
-                my: 2,
-              }}
-            >
-              <UpdateIcon
-                fontSize="large"
+    <>
+      <Card>
+        <Box sx={{ ml: 2, my: 2 }}>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" href="/stores">
+              Stores
+            </Link>
+            <Typography color="text.primary">
+              Shoes Inventory of {storeDetailsData?.store?.name} store
+            </Typography>
+          </Breadcrumbs>
+        </Box>
+        <NoData
+          show={
+            !loadingStoreDetailsData &&
+            (!storeDetailsData?.store?.inventories ||
+              storeDetailsData?.store?.inventories.length <= 0)
+          }
+        />
+        <ContainerLoading show={loadingStoreDetailsData} />
+        {storeDetailsData?.store?.inventories &&
+          storeDetailsData?.store?.inventories.length > 0 && (
+            <PerfectScrollbar>
+              <Box
                 sx={{
-                  color: theme.palette.info.main,
-                  mr: 1,
+                  alignItems: "center",
+                  display: "flex",
+                  width: "100%",
+                  justifyContent: "center",
+                  my: 2,
                 }}
-              />
-              <Typography color={theme.palette.text.primary}>
-                Updated at {format(updatedTime, "dd/MM - HH:mm:ss")}
-              </Typography>
-            </Box>
-            <Box sx={{ minWidth: 800 }}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCellStyled>Model</TableCellStyled>
-                    <TableCellStyled>Inventory</TableCellStyled>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {storeDetailsData?.store?.inventories.map(
-                    (actualInventory) => (
-                      <TableRow hover key={actualInventory.id}>
-                        <TableCellStyled>
-                          {actualInventory.product?.name}
-                        </TableCellStyled>
-                        <TableCellStyled>
-                          {actualInventory.amount}
-                        </TableCellStyled>
-                      </TableRow>
-                    )
-                  )}
-                </TableBody>
-              </Table>
-            </Box>
-          </PerfectScrollbar>
-        )}
-    </Card>
+              >
+                <UpdateIcon
+                  fontSize="large"
+                  sx={{
+                    color: theme.palette.info.main,
+                    mr: 1,
+                  }}
+                />
+                <Typography color={theme.palette.text.primary}>
+                  Updated at {format(updatedTime, "dd/MM - HH:mm:ss")}
+                </Typography>
+              </Box>
+              <Box sx={{ minWidth: 800 }}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCellStyled>Model</TableCellStyled>
+                      <TableCellStyled>Inventory</TableCellStyled>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {storeDetailsData?.store?.inventories.map(
+                      (actualInventory) => (
+                        <TableRow hover key={actualInventory.id}>
+                          <TableCellStyled>
+                            {actualInventory.product?.name}
+                          </TableCellStyled>
+                          <TableCellStyled>
+                            {formatDecimal(actualInventory.amount) || 0}
+                          </TableCellStyled>
+                        </TableRow>
+                      )
+                    )}
+                  </TableBody>
+                </Table>
+              </Box>
+            </PerfectScrollbar>
+          )}
+      </Card>
+    </>
   );
 };
