@@ -119,15 +119,21 @@ const Dashboard = () => {
               <Grid item xl={3} lg={3} sm={6} xs={12}>
                 <TotalInventory amount={dashboardData?.totalAmountInventory} />
               </Grid>
-              <Grid xs={12}>
-                <Line
-                  data={latestSalesChartData}
-                  options={getLineChartOptions({
-                    title: "Latest Sales(10 minutes)",
-                  })}
-                  style={{ maxHeight: 400 }}
-                />
-              </Grid>
+              {latestSalesChartData &&
+                latestSalesChartData?.datasets &&
+                latestSalesChartData?.labels &&
+                latestSalesChartData?.labels.length > 0 &&
+                latestSalesChartData?.datasets.length > 0 && (
+                  <Grid item xs={12}>
+                    <Line
+                      data={latestSalesChartData}
+                      options={getLineChartOptions({
+                        title: "Latest Sales(10 minutes)",
+                      })}
+                      style={{ maxHeight: 400 }}
+                    />
+                  </Grid>
+                )}
               {storesLabels && storeTotalPercentageInventoryData && (
                 <Grid item xl={6} xs={12}>
                   <Bar
