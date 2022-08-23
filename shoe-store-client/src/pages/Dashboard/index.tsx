@@ -1,6 +1,8 @@
 // Libs
 import { useEffect } from "react";
 import { Box, Container, Grid } from "@mui/material";
+import { Chart as ChartJS, registerables } from "chart.js";
+import { Bar } from "react-chartjs-2";
 
 // Components
 import { ContainerLoading } from "components/ContainerLoading";
@@ -14,6 +16,10 @@ import { TotalInventory } from "./components/TotalInventory";
 // Hooks
 import { useDashboard } from "hooks/useDashboard";
 
+// Local imports
+import { getChartOptions } from "./chartOptions";
+import { theme } from "theme";
+
 const Dashboard = () => {
   const {
     dashboardData,
@@ -22,12 +28,46 @@ const Dashboard = () => {
     stopPollingDashboardData,
   } = useDashboard();
 
+  ChartJS.register(...registerables);
+
   useEffect(() => {
-    startPollingDashboardData(100);
+    startPollingDashboardData(1000);
     return function cleanup() {
       stopPollingDashboardData();
     };
   }, [startPollingDashboardData, stopPollingDashboardData]);
+
+  const storesLabels = dashboardData?.stores?.map(
+    (actualStore) => actualStore.name
+  );
+  const storeTotalPercentageSalesData = dashboardData?.stores.map(
+    (actualStore) => actualStore.percentageOfSales
+  );
+  const storeTotalPercentageInventoryData = dashboardData?.stores.map(
+    (actualStore) => actualStore.percentageOfInventory
+  );
+
+  const percentageOfSalesData = {
+    labels: storesLabels || [],
+    datasets: [
+      {
+        label: "Sales",
+        data: storeTotalPercentageSalesData || [],
+        backgroundColor: theme.palette.success.main,
+      },
+    ],
+  };
+
+  const percentageOfInventoryData = {
+    labels: storesLabels || [],
+    datasets: [
+      {
+        label: "Inventory",
+        data: storeTotalPercentageInventoryData || [],
+        backgroundColor: theme.palette.info.main,
+      },
+    ],
+  };
 
   return (
     <>
@@ -55,7 +95,27 @@ const Dashboard = () => {
               <Grid item xl={3} lg={3} sm={6} xs={12}>
                 <TotalInventory amount={dashboardData?.totalAmountInventory} />
               </Grid>
-              <Grid item lg={8} md={12} xl={9} xs={12}>
+              {storesLabels && storeTotalPercentageInventoryData && (
+                <Grid item xl={6} xs={12}>
+                  <Bar
+                    options={getChartOptions({
+                      title: "Percentage of Inventory per store",
+                    })}
+                    data={percentageOfInventoryData}
+                  />
+                </Grid>
+              )}
+              {storesLabels && storeTotalPercentageSalesData && (
+                <Grid item xl={6} xs={12}>
+                  <Bar
+                    options={getChartOptions({
+                      title: "Percentage of Sales per store",
+                    })}
+                    data={percentageOfSalesData}
+                  />
+                </Grid>
+              )}
+              <Grid item xs={12}>
                 <LatestSales sales={dashboardData?.latestSales} />
               </Grid>
             </Grid>

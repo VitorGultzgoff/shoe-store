@@ -53,7 +53,7 @@ export const StoreDetails = () => {
   }, [id, setActualStoreId]);
 
   useEffect(() => {
-    startPollingStoreDetailsData(100);
+    startPollingStoreDetailsData(1000);
     return function cleanup() {
       stopPollingStoreDetailsData();
     };

@@ -19,6 +19,12 @@ export const DASHBOARD_DATA = gql`
         name
       }
     }
+    stores {
+      id
+      name
+      percentageOfSales
+      percentageOfInventory
+    }
   }
 `;
 

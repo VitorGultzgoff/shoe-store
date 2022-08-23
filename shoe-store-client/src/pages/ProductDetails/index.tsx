@@ -51,7 +51,7 @@ export const ProductDetails = () => {
   }, [id, setActualProductId]);
 
   useEffect(() => {
-    startPollingProductDetailsData(100);
+    startPollingProductDetailsData(1000);
     return function cleanup() {
       stopPollingProductDetailsData();
     };

@@ -9,6 +9,7 @@ export interface IDashboardData {
   totalProducts: number;
   totalAmountInventory: number;
   latestSales: ISaleData[];
+  stores: IStoreData[];
 }
 
 export interface IStoresData {

@@ -43,7 +43,7 @@ export const Products = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    startPollingProductsData(100);
+    startPollingProductsData(1000);
     return function cleanup() {
       stopPollingProductsData();
     };

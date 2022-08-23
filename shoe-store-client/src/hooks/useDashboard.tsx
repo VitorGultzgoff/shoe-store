@@ -1,6 +1,6 @@
 // Libs
 import React, { createContext, useContext, useMemo } from "react";
-import { FetchMoreOptions, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
 // GraphQL
 import { DASHBOARD_DATA } from "graphql/queries";
