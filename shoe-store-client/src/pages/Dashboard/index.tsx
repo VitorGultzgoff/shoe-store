@@ -2,7 +2,8 @@
 import { useEffect } from "react";
 import { Box, Container, Grid } from "@mui/material";
 import { Chart as ChartJS, registerables } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
+import { format } from "date-fns";
 
 // Components
 import { ContainerLoading } from "components/ContainerLoading";
@@ -20,7 +21,7 @@ import { TIMEOUTS } from "constants/data";
 import { useDashboard } from "hooks/useDashboard";
 
 // Local imports
-import { getChartOptions } from "./chartOptions";
+import { getBarChartOptions, getLineChartOptions } from "./chartOptions";
 import { theme } from "theme";
 
 const Dashboard = () => {
@@ -72,6 +73,26 @@ const Dashboard = () => {
     ],
   };
 
+  const latestSalesChartData = {
+    labels: dashboardData?.latestSalesPerTime
+      ? Object.keys(dashboardData?.latestSalesPerTime)?.map((actualSaleDate) =>
+          format(new Date(actualSaleDate), "mm:ss")
+        )
+      : [],
+    datasets: [
+      {
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: "rgb(53, 162, 235)",
+        label: "Quantity of Sales",
+        data: dashboardData?.latestSalesPerTime
+          ? Object.values(dashboardData?.latestSalesPerTime)?.map(
+              (actualSaleQuantity) => actualSaleQuantity
+            )
+          : [],
+      },
+    ],
+  };
+
   return (
     <>
       <NoData show={!loadingDashboardData && !dashboardData} />
@@ -98,10 +119,19 @@ const Dashboard = () => {
               <Grid item xl={3} lg={3} sm={6} xs={12}>
                 <TotalInventory amount={dashboardData?.totalAmountInventory} />
               </Grid>
+              <Grid xs={12}>
+                <Line
+                  data={latestSalesChartData}
+                  options={getLineChartOptions({
+                    title: "Latest Sales(10 minutes)",
+                  })}
+                  style={{ maxHeight: 400 }}
+                />
+              </Grid>
               {storesLabels && storeTotalPercentageInventoryData && (
                 <Grid item xl={6} xs={12}>
                   <Bar
-                    options={getChartOptions({
+                    options={getBarChartOptions({
                       title: "Percentage of Inventory per store",
                     })}
                     data={percentageOfInventoryData}
@@ -111,7 +141,7 @@ const Dashboard = () => {
               {storesLabels && storeTotalPercentageSalesData && (
                 <Grid item xl={6} xs={12}>
                   <Bar
-                    options={getChartOptions({
+                    options={getBarChartOptions({
                       title: "Percentage of Sales per store",
                     })}
                     data={percentageOfSalesData}

@@ -11,6 +11,7 @@ export interface IDashboardData {
   totalAmountInventory: number;
   latestSales: ISaleData[];
   stores: IStoreData[];
+  latestSalesPerTime: ISaleData[];
 }
 
 export interface IStoresData {

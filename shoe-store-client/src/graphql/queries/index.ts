@@ -25,6 +25,7 @@ export const DASHBOARD_DATA = gql`
       percentageOfSales
       percentageOfInventory
     }
+    latestSalesPerTime
   }
 `;
 
