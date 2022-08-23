@@ -9,7 +9,7 @@ import {
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import { ThemeProvider } from "@mui/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { ScopedCssBaseline } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
 
