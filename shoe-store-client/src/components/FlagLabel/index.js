@@ -2,7 +2,6 @@ import { styled } from "@mui/material/styles";
 
 const FlagLabelRoot = styled("span")(
   ({ bgColor, color, theme, otherStyles }) => {
-    console.log("otherStyles = ", otherStyles);
     return {
       alignItems: "center",
       backgroundColor: bgColor,
