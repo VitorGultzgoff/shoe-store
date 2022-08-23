@@ -6,6 +6,7 @@ import { Box, Divider, Drawer, Typography, useMediaQuery } from "@mui/material";
 import { ChartBar as ChartBarIcon } from "icons/chart-bar";
 import { ShoppingBag as ShoppingBagIcon } from "icons/shopping-bag";
 import StoreIcon from "@mui/icons-material/Store";
+import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 
 // Components
 import { NavItem } from "./NavItem";
@@ -26,6 +27,11 @@ const navbarItems = [
     icon: <ShoppingBagIcon fontSize="small" />,
     title: "Models",
   },
+  {
+    href: "/models_suggestions",
+    icon: <TipsAndUpdatesIcon fontSize="small" />,
+    title: "Suggestions",
+  },
 ];
 
 export const ApplicationSidebar = ({ open, onClose }) => {
@@ -44,14 +50,6 @@ export const ApplicationSidebar = ({ open, onClose }) => {
         }}
       >
         <div>
-          {/* <Box sx={{ p: 3 }}>
-            <Logo
-              sx={{
-                height: 42,
-                width: 42,
-              }}
-            />
-          </Box> */}
           <Box sx={{ px: 2, mt: 2, textAlign: "center" }}>
             <Typography color="inherit" variant="subtitle1">
               Aldo Shoes

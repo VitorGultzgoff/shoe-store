@@ -2,6 +2,7 @@
 import { ISaleData } from "types/Sale.model";
 import { IStoreData } from "types/Store.model";
 import { IProductData } from "types/Product.model";
+import { IProductInventoryData } from "types/ProductInventory.model";
 
 export interface IDashboardData {
   totalSales: number;
@@ -26,4 +27,14 @@ export interface IProductsData {
 
 export interface IProductDetailData {
   product: IProductData;
+}
+
+export interface IProductSuggestionData {
+  id: string;
+  suggestionSource: IProductInventoryData;
+  suggestionTarget: IProductInventoryData;
+}
+
+export interface IProductSuggestionsData {
+  productSuggestions: IProductSuggestionData[];
 }

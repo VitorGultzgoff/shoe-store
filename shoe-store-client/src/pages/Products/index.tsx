@@ -21,6 +21,9 @@ import { FlagLabel } from "components/FlagLabel";
 import { NoData } from "components/NoData";
 import { TableCellStyled } from "components/TableCellStyled";
 
+// Constants
+import { TIMEOUTS } from "constants/data";
+
 // Hooks
 import { useProducts } from "hooks/useProducts";
 
@@ -43,7 +46,7 @@ export const Products = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    startPollingProductsData(1000);
+    startPollingProductsData(TIMEOUTS.GENERAL);
     return function cleanup() {
       stopPollingProductsData();
     };

@@ -18,8 +18,13 @@ import { useParams } from "react-router-dom";
 
 // Components
 import { ContainerLoading } from "components/ContainerLoading";
+import { FlagLabel } from "components/FlagLabel";
 import { NoData } from "components/NoData";
 import { TableCellStyled } from "components/TableCellStyled";
+
+// Constants
+import { TIMEOUTS } from "constants/data";
+import { INVENTORY_LEVELS } from "constants/inventory";
 
 // Hooks
 import { useProducts } from "hooks/useProducts";
@@ -29,8 +34,6 @@ import UpdateIcon from "@mui/icons-material/Update";
 
 // Utils
 import { formatDecimal } from "utils/format";
-import { FlagLabel } from "components/FlagLabel";
-import { INVENTORY_LEVELS } from "constants/inventory";
 
 export const ProductDetails = () => {
   const theme = useTheme();
@@ -51,7 +54,7 @@ export const ProductDetails = () => {
   }, [id, setActualProductId]);
 
   useEffect(() => {
-    startPollingProductDetailsData(1000);
+    startPollingProductDetailsData(TIMEOUTS.MEDIUM);
     return function cleanup() {
       stopPollingProductDetailsData();
     };

@@ -9,6 +9,7 @@ import { ApplicationLayout } from "layouts/ApplicationLayout/ApplicationLayout";
 import Dashboard from "./pages/Dashboard";
 import { Products } from "pages/Products";
 import { ProductDetails } from "pages/ProductDetails";
+import { ProductInventorySuggestions } from "pages/ProductInventorySuggestions";
 import { Stores } from "pages/Stores";
 import { StoreDetails } from "pages/StoreDetails";
 
@@ -21,6 +22,10 @@ function App() {
         <Route path="stores/:id" element={<StoreDetails />} />
         <Route path="models" element={<Products />} />
         <Route path="models/:id" element={<ProductDetails />} />
+        <Route
+          path="models_suggestions"
+          element={<ProductInventorySuggestions />}
+        />
       </Routes>
     </ApplicationLayout>
   );

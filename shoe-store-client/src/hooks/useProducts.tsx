@@ -9,10 +9,18 @@ import React, {
 import { useQuery } from "@apollo/client";
 
 // GraphQL
-import { GET_ALL_PRODUCT_VIEW, GET_PRODUCT_DATA_BY_ID } from "graphql/queries";
+import {
+  GET_ALL_PRODUCT_VIEW,
+  GET_PRODUCT_DATA_BY_ID,
+  GET_PRODUCT_INVENTORY_SUGGESTIONS,
+} from "graphql/queries";
 
 // Types
-import { IProductDetailData, IProductsData } from "types/Queries.model";
+import {
+  IProductDetailData,
+  IProductsData,
+  IProductSuggestionsData,
+} from "types/Queries.model";
 
 interface IProductsContextData {
   productsData: IProductsData;
@@ -27,6 +35,11 @@ interface IProductsContextData {
   productDetailsData: IProductDetailData;
   startPollingProductDetailsData: (pollInterval: number) => void;
   stopPollingProductDetailsData: () => void;
+
+  loadingProductInventorySuggestionsData: boolean;
+  productSuggestionsData: IProductSuggestionsData;
+  startPollingProductSuggestionsData: (pollInterval: number) => void;
+  stopPollingProductSuggestionsData: () => void;
 }
 
 // Context
@@ -61,9 +74,16 @@ const UseProductsProvider: React.FC<IUseProductsProviderProps> = ({
     variables: { product_id: actualProductId },
   });
 
+  const {
+    loading: loadingProductInventorySuggestionsData,
+    data: productSuggestionsData,
+    startPolling: startPollingProductSuggestionsData,
+    stopPolling: stopPollingProductSuggestionsData,
+  } = useQuery(GET_PRODUCT_INVENTORY_SUGGESTIONS);
+
   useEffect(() => {
     setUpdatedTime(new Date());
-  }, [productsData, productDetailsData]);
+  }, [productsData, productDetailsData, productSuggestionsData]);
 
   const value = useMemo(
     () => ({
@@ -79,6 +99,11 @@ const UseProductsProvider: React.FC<IUseProductsProviderProps> = ({
       productDetailsData,
       startPollingProductDetailsData,
       stopPollingProductDetailsData,
+
+      loadingProductInventorySuggestionsData,
+      productSuggestionsData,
+      startPollingProductSuggestionsData,
+      stopPollingProductSuggestionsData,
     }),
     [
       productsData,
@@ -93,6 +118,11 @@ const UseProductsProvider: React.FC<IUseProductsProviderProps> = ({
       productDetailsData,
       startPollingProductDetailsData,
       stopPollingProductDetailsData,
+
+      loadingProductInventorySuggestionsData,
+      productSuggestionsData,
+      startPollingProductSuggestionsData,
+      stopPollingProductSuggestionsData,
     ]
   );
 

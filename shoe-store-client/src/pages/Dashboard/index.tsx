@@ -13,6 +13,9 @@ import { TotalStores } from "./components/TotalStores";
 import { TotalModels } from "./components/TotalProducts";
 import { TotalInventory } from "./components/TotalInventory";
 
+// Constants
+import { TIMEOUTS } from "constants/data";
+
 // Hooks
 import { useDashboard } from "hooks/useDashboard";
 
@@ -31,7 +34,7 @@ const Dashboard = () => {
   ChartJS.register(...registerables);
 
   useEffect(() => {
-    startPollingDashboardData(1000);
+    startPollingDashboardData(TIMEOUTS.GENERAL);
     return function cleanup() {
       stopPollingDashboardData();
     };

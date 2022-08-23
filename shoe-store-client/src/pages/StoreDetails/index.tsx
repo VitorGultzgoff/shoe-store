@@ -23,6 +23,9 @@ import { NoData } from "components/NoData";
 import { TableCellStyled } from "components/TableCellStyled";
 
 // Constants
+import { TIMEOUTS } from "constants/data";
+
+// Constants
 import { INVENTORY_LEVELS } from "constants/inventory";
 
 // Hooks
@@ -53,7 +56,7 @@ export const StoreDetails = () => {
   }, [id, setActualStoreId]);
 
   useEffect(() => {
-    startPollingStoreDetailsData(1000);
+    startPollingStoreDetailsData(TIMEOUTS.MEDIUM);
     return function cleanup() {
       stopPollingStoreDetailsData();
     };

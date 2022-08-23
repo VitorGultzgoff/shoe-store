@@ -87,6 +87,37 @@ export const GET_PRODUCT_DATA_BY_ID = gql`
   }
 `;
 
+export const GET_PRODUCT_INVENTORY_SUGGESTIONS = gql`
+  query {
+    productSuggestions {
+      id
+      suggestionSource {
+        id
+        amount
+        product {
+          id
+          name
+        }
+        store {
+          id
+          name
+        }
+      }
+      suggestionTarget {
+        amount
+        product {
+          id
+          name
+        }
+        store {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
 export const GET_ALL_PRODUCT_VIEW = gql`
   query {
     products {
