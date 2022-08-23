@@ -11,7 +11,6 @@ import { IDashboardData } from "types/Queries.model";
 interface IDashboardContextData {
   dashboardData: IDashboardData;
   loadingDashboardData: boolean;
-  retrieveDashboardData: (fetchOptions: FetchMoreOptions) => void;
   startPollingDashboardData: (pollInterval: number) => void;
   stopPollingDashboardData: () => void;
 }
@@ -33,7 +32,6 @@ const UseDashboardProvider: React.FC<IUseDashboardProviderProps> = ({
   const {
     loading: loadingDashboardData,
     data: dashboardData,
-    fetchMore: retrieveDashboardData,
     startPolling: startPollingDashboardData,
     stopPolling: stopPollingDashboardData,
   } = useQuery(DASHBOARD_DATA);
@@ -42,14 +40,12 @@ const UseDashboardProvider: React.FC<IUseDashboardProviderProps> = ({
     () => ({
       dashboardData,
       loadingDashboardData,
-      retrieveDashboardData,
       startPollingDashboardData,
       stopPollingDashboardData,
     }),
     [
       dashboardData,
       loadingDashboardData,
-      retrieveDashboardData,
       startPollingDashboardData,
       stopPollingDashboardData,
     ]

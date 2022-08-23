@@ -13,6 +13,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import { ContainerLoading } from "components/ContainerLoading";
@@ -37,6 +38,8 @@ export const Stores = () => {
     startPollingStoresData,
     stopPollingStoresData,
   } = useStores();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     startPollingStoresData(100);
@@ -92,7 +95,11 @@ export const Stores = () => {
               </TableHead>
               <TableBody>
                 {storesData?.stores.map((actualStore) => (
-                  <TableRow hover key={actualStore.id}>
+                  <TableRow
+                    hover
+                    key={actualStore.id}
+                    onClick={() => navigate(`/stores/${actualStore.id}`)}
+                  >
                     <TableCellStyled>{actualStore.name}</TableCellStyled>
                     <TableCellStyled>
                       {formatPercentage(actualStore.percentageOfInventory || 0)}

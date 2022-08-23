@@ -17,7 +17,6 @@ import { IProductsData } from "types/Queries.model";
 interface IProductsContextData {
   productsData: IProductsData;
   loadingProductsData: boolean;
-  retrieveProductsData: (fetchOptions: FetchMoreOptions) => void;
   updatedTime: Date;
   startPollingProductsData: (pollInterval: number) => void;
   stopPollingProductsData: () => void;
@@ -41,7 +40,6 @@ const UseProductsProvider: React.FC<IUseProductsProviderProps> = ({
   const {
     loading: loadingProductsData,
     data: productsData,
-    fetchMore: retrieveProductsData,
     startPolling: startPollingProductsData,
     stopPolling: stopPollingProductsData,
   } = useQuery(GET_ALL_PRODUCT_VIEW);
@@ -54,7 +52,6 @@ const UseProductsProvider: React.FC<IUseProductsProviderProps> = ({
     () => ({
       productsData,
       loadingProductsData,
-      retrieveProductsData,
       updatedTime,
       startPollingProductsData,
       stopPollingProductsData,
@@ -62,7 +59,6 @@ const UseProductsProvider: React.FC<IUseProductsProviderProps> = ({
     [
       productsData,
       loadingProductsData,
-      retrieveProductsData,
       updatedTime,
       startPollingProductsData,
       stopPollingProductsData,

@@ -6,21 +6,27 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { FetchMoreOptions, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
 // GraphQL
-import { GET_ALL_STORE_VIEW } from "graphql/queries";
+import { GET_ALL_STORE_VIEW, GET_STORE_DATA_BY_ID } from "graphql/queries";
 
 // Types
-import { IStoresData } from "types/Queries.model";
+import { IStoreDetailData, IStoresData } from "types/Queries.model";
 
 interface IStoresContextData {
   storesData: IStoresData;
   loadingStoresData: boolean;
-  retrieveStoresData: (fetchOptions: FetchMoreOptions) => void;
   updatedTime: Date;
   startPollingStoresData: (pollInterval: number) => void;
   stopPollingStoresData: () => void;
+
+  actualStoreId: string;
+  setActualStoreId: (storeId: string) => void;
+  loadingStoreDetailsData: boolean;
+  storeDetailsData: IStoreDetailData;
+  startPollingStoreDetailsData: (pollInterval: number) => void;
+  stopPollingStoreDetailsData: () => void;
 }
 
 // Context
@@ -36,34 +42,55 @@ interface IUseStoresProviderProps {
 const UseStoresProvider: React.FC<IUseStoresProviderProps> = ({ children }) => {
   // Context states
   const [updatedTime, setUpdatedTime] = useState<Date>(new Date());
+  const [actualStoreId, setActualStoreId] = useState<string>("");
   const {
     loading: loadingStoresData,
     data: storesData,
-    fetchMore: retrieveStoresData,
     startPolling: startPollingStoresData,
     stopPolling: stopPollingStoresData,
   } = useQuery(GET_ALL_STORE_VIEW);
 
+  const {
+    loading: loadingStoreDetailsData,
+    data: storeDetailsData,
+    startPolling: startPollingStoreDetailsData,
+    stopPolling: stopPollingStoreDetailsData,
+  } = useQuery(GET_STORE_DATA_BY_ID, {
+    variables: { store_id: actualStoreId },
+  });
+
   useEffect(() => {
     setUpdatedTime(new Date());
-  }, [storesData]);
+  }, [storesData, storeDetailsData]);
 
   const value = useMemo(
     () => ({
       storesData,
       loadingStoresData,
-      retrieveStoresData,
       updatedTime,
       startPollingStoresData,
       stopPollingStoresData,
+
+      actualStoreId,
+      setActualStoreId,
+      loadingStoreDetailsData,
+      storeDetailsData,
+      startPollingStoreDetailsData,
+      stopPollingStoreDetailsData,
     }),
     [
       storesData,
       loadingStoresData,
-      retrieveStoresData,
       updatedTime,
       startPollingStoresData,
       stopPollingStoresData,
+
+      actualStoreId,
+      setActualStoreId,
+      loadingStoreDetailsData,
+      storeDetailsData,
+      startPollingStoreDetailsData,
+      stopPollingStoreDetailsData,
     ]
   );
 

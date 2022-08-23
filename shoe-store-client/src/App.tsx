@@ -9,6 +9,7 @@ import { ApplicationLayout } from "layouts/ApplicationLayout/ApplicationLayout";
 import Dashboard from "./pages/Dashboard";
 import { Products } from "pages/Products";
 import { Stores } from "pages/Stores";
+import { StoreDetails } from "pages/StoreDetails";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="stores" element={<Stores />} />
+        <Route path="stores/:id" element={<StoreDetails />} />
         <Route path="models" element={<Products />} />
       </Routes>
     </ApplicationLayout>

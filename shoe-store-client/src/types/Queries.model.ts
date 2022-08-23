@@ -15,6 +15,10 @@ export interface IStoresData {
   stores: IStoreData[];
 }
 
+export interface IStoreDetailData {
+  store: IStoreData;
+}
+
 export interface IProductsData {
   products: IProductData[];
 }
