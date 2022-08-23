@@ -52,14 +52,6 @@ export const ApplicationNavbar = ({ onSidebarOpen }) => {
           >
             <MenuIcon fontSize="small" />
           </IconButton>
-          <Box sx={{ flexGrow: 1 }} />
-          <Tooltip title="Notifications">
-            <IconButton sx={{ ml: 1 }}>
-              <Badge badgeContent={4} color="primary" variant="dot">
-                <BellIcon fontSize="small" />
-              </Badge>
-            </IconButton>
-          </Tooltip>
         </Toolbar>
       </ApplicationNavbarRoot>
     </>
