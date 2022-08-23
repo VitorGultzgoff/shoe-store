@@ -12,10 +12,16 @@ import {
 } from "@apollo/client";
 import { ThemeProvider } from "@mui/styles";
 import { ScopedCssBaseline } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
 
 // Constants
 import { ENV_URLS } from "./constants/config";
 import { theme } from "./theme";
+
+// Hooks
+import { UseDashboardProvider } from "hooks/useDashboard";
+import { UseProductsProvider } from "hooks/useProducts";
+import { UseStoresProvider } from "hooks/useStores";
 
 // Style
 import "./index.css";
@@ -33,19 +39,25 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-console.log("theme in app = ", theme);
-
 root.render(
   <React.StrictMode>
-    <ActionCableProvider url={ENV_URLS.ACTION_CABLE_SERVER}>
-      <ApolloProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <ScopedCssBaseline>
-            <App />
-          </ScopedCssBaseline>
-        </ThemeProvider>
-      </ApolloProvider>
-    </ActionCableProvider>
+    <ThemeProvider theme={theme}>
+      <ScopedCssBaseline>
+        <ActionCableProvider url={ENV_URLS.ACTION_CABLE_SERVER}>
+          <ApolloProvider client={client}>
+            <UseDashboardProvider>
+              <UseStoresProvider>
+                <UseProductsProvider>
+                  <BrowserRouter>
+                    <App />
+                  </BrowserRouter>
+                </UseProductsProvider>
+              </UseStoresProvider>
+            </UseDashboardProvider>
+          </ApolloProvider>
+        </ActionCableProvider>
+      </ScopedCssBaseline>
+    </ThemeProvider>
   </React.StrictMode>
 );
 

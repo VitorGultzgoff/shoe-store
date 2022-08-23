@@ -2,10 +2,9 @@
 import { IProductData } from "types/Product.model";
 import { IStoreData } from "types/Store.model";
 
-export interface ISaleData {
+export interface IProductInventoryData {
   id: string;
-  createdAt: string;
   amount: number;
-  store: IStoreData;
-  product: IProductData;
+  product?: IProductData;
+  store?: IStoreData;
 }

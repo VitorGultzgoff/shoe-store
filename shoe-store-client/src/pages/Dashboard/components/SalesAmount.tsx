@@ -13,13 +13,16 @@ import {
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
 
-export const SalesAmount = (props) => {
+// Utils
+import { formatDecimal } from "utils/format";
+
+export const SalesAmount = ({ amount }) => {
   const {
     palette: { success, text },
   } = useTheme();
 
   return (
-    <Card sx={{ height: "100%" }} {...props}>
+    <Card sx={{ height: "100%" }}>
       <CardContent>
         <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
           <Grid item>
@@ -27,7 +30,7 @@ export const SalesAmount = (props) => {
               SALES AMOUNT
             </Typography>
             <Typography color={text.primary} variant="h4">
-              6.849
+              {formatDecimal(amount)}
             </Typography>
           </Grid>
           <Grid item>

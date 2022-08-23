@@ -1,36 +1,55 @@
 // Libs
 import React from "react";
-import { ActionCableConsumer } from "react-actioncable-provider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import { useQuery } from "@apollo/client";
+import { ActionCableConsumer } from "react-actioncable-provider";
+import { useLocation } from "react-router-dom";
 
-// // GraphQL
-// import { GET_ALL_STORES } from "./graphql/queries";
+// Hooks
+import { useDashboard } from "hooks/useDashboard";
+import { useProducts } from "hooks/useProducts";
+import { useStores } from "hooks/useStores";
 
 // Layouts
 import { ApplicationLayout } from "layouts/ApplicationLayout/ApplicationLayout";
 
 // Pages
 import Dashboard from "./pages/Dashboard";
-import { Models } from "pages/Models";
+import { Products } from "pages/Products";
 import { Stores } from "pages/Stores";
 
 function App() {
-  // const { loading, error, data, fetchMore } = useQuery(GET_ALL_STORES);
-  // console.log("error = ", error);
-  // console.log("data = ", data);
+  const { retrieveDashboardData } = useDashboard();
+  const { retrieveProductsData } = useProducts();
+  const { retrieveStoresData } = useStores();
+  const { pathname } = useLocation();
+
+  const syncData = () => {
+    switch (pathname) {
+      case "/stores":
+        retrieveStoresData({});
+        break;
+      case "/models":
+        retrieveProductsData({});
+        break;
+      case "/":
+      default:
+        retrieveDashboardData({});
+        break;
+    }
+  };
   return (
-    <ActionCableConsumer channel="DataBridgeChannel">
-      <BrowserRouter>
-        <ApplicationLayout>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="stores" element={<Stores />} />
-            <Route path="models" element={<Models />} />
-          </Routes>
-        </ApplicationLayout>
-      </BrowserRouter>
-    </ActionCableConsumer>
+    <ApplicationLayout>
+      <ActionCableConsumer
+        channel="DataBridgeChannel"
+        onReceived={() => syncData()}
+      >
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="stores" element={<Stores />} />
+          <Route path="models" element={<Products />} />
+        </Routes>
+      </ActionCableConsumer>
+    </ApplicationLayout>
   );
 }
 

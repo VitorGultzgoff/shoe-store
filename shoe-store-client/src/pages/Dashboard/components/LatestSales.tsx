@@ -1,6 +1,5 @@
 // Libs
 import { format } from "date-fns";
-import { v4 as uuid } from "uuid";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {
   Box,
@@ -8,84 +7,64 @@ import {
   CardHeader,
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableRow,
+  Typography,
+  useTheme,
 } from "@mui/material";
 
-const sales = [
-  {
-    id: uuid(),
-    store: "ALDO Centre Eaton",
-    inventory: 30,
-    model: "ELOILLAN",
-    createdAt: 1555016400000,
-  },
-  {
-    id: uuid(),
-    store: "ALDO Destiny USA Mall",
-    inventory: 25,
-    model: "CADEVEN",
-    createdAt: 1555016400000,
-  },
-  {
-    id: uuid(),
-    store: "ALDO Holyoke Mall",
-    inventory: 10,
-    model: "WUMA",
-    createdAt: 1554930000000,
-  },
-  {
-    id: uuid(),
-    store: "ALDO Crossgates Mall",
-    inventory: 96,
-    model: "SODANO",
-    createdAt: 1554757200000,
-  },
-  {
-    id: uuid(),
-    store: "ALDO Solomon Pond Mall",
-    inventory: 32,
-    model: "ADERI",
-    createdAt: 1554670800000,
-  },
-  {
-    id: uuid(),
-    store: "ALDO Destiny USA Mall",
-    inventory: 16,
-    model: "MIRIRA",
-    createdAt: 1554670800000,
-  },
-];
+// Components
+import { TableCellStyled } from "components/TableCellStyled";
 
-export const LatestSales = (props) => (
-  <Card {...props}>
-    <CardHeader title="Latest Sales" />
-    <PerfectScrollbar>
-      <Box sx={{ minWidth: 800 }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Store</TableCell>
-              <TableCell>Model</TableCell>
-              <TableCell>Inventory</TableCell>
-              <TableCell>Date</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {sales.map((actualSale) => (
-              <TableRow hover key={actualSale.id}>
-                <TableCell>{actualSale.store}</TableCell>
-                <TableCell>{actualSale.model}</TableCell>
-                <TableCell>{actualSale.inventory}</TableCell>
-                <TableCell>
-                  {format(actualSale.createdAt, "dd/MM hh:mm:ss")}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Box>
-    </PerfectScrollbar>
-  </Card>
-);
+// Types
+import { ISaleData } from "types/Sale.model";
+
+interface ILatestSalesProps {
+  sales: ISaleData[];
+}
+
+export const LatestSales: React.FC<ILatestSalesProps> = ({ sales }) => {
+  const theme = useTheme();
+  return (
+    <Card>
+      <CardHeader title="Latest Sales" />
+      {(!sales || sales.length <= 0) && (
+        <Box sx={{ my: 2, width: "100%", textAlign: "center" }}>
+          <Typography color={theme.palette.text.secondary}>
+            There is not data to display
+          </Typography>
+        </Box>
+      )}
+      {sales && sales.length > 0 && (
+        <PerfectScrollbar>
+          <Box sx={{ minWidth: 800 }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCellStyled>Store</TableCellStyled>
+                  <TableCellStyled>Model</TableCellStyled>
+                  <TableCellStyled>Inventory</TableCellStyled>
+                  <TableCellStyled>Date</TableCellStyled>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {sales.map((actualSale) => (
+                  <TableRow hover key={actualSale.id}>
+                    <TableCellStyled>{actualSale.store?.name}</TableCellStyled>
+                    <TableCellStyled>
+                      {actualSale.product?.name}
+                    </TableCellStyled>
+                    <TableCellStyled>{actualSale.amount}</TableCellStyled>
+                    <TableCellStyled>
+                      {format(new Date(actualSale.createdAt), "dd/MM HH:mm:ss")}
+                    </TableCellStyled>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Box>
+        </PerfectScrollbar>
+      )}
+    </Card>
+  );
+};

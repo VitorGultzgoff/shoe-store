@@ -1,5 +1,7 @@
 // Types
 import { ISaleData } from "types/Sale.model";
+import { IStoreData } from "types/Store.model";
+import { IProductData } from "types/Product.model";
 
 export interface IDashboardData {
   totalSales: number;
@@ -7,4 +9,12 @@ export interface IDashboardData {
   totalProducts: number;
   totalAmountInventory: number;
   latestSales: ISaleData[];
+}
+
+export interface IStoresData {
+  stores: IStoreData[];
+}
+
+export interface IProductsData {
+  products: IProductData[];
 }

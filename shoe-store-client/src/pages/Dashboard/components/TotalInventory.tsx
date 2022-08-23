@@ -13,12 +13,15 @@ import {
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import InventoryIcon from "@mui/icons-material/Inventory";
 
-export const TotalInventory = (props) => {
+// Utils
+import { formatDecimal } from "utils/format";
+
+export const TotalInventory = ({ amount }) => {
   const {
     palette: { success, text, warning },
   } = useTheme();
   return (
-    <Card {...props}>
+    <Card>
       <CardContent>
         <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
           <Grid item>
@@ -26,7 +29,7 @@ export const TotalInventory = (props) => {
               TOTAL INVENTORY
             </Typography>
             <Typography color={text.primary} variant="h4">
-              9.648
+              {formatDecimal(amount)}
             </Typography>
           </Grid>
           <Grid item>
