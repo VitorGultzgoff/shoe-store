@@ -36,10 +36,11 @@
 
 ## Setup
 
-- Install and setup the requirements
-- If your Redis contains password, or is setup in a different port than _6379_, you should replace on : <blockquote>shoe-store-server/config/initializers/sidekiq.rb</blockquote>
+1. Install and setup the requirements
 
-1. In the main folder, setup websocketd:
+2. If your Redis contains password, or is setup in a different port than _6379_, you should replace on : <blockquote>shoe-store-server/config/initializers/sidekiq.rb</blockquote>
+
+3. In the main folder, setup websocketd:
 
 ```
   cd bin
@@ -47,7 +48,7 @@
 
 ```
 
-2. In the subfolder of client, install the dependencies and start the server
+4. In the subfolder of client, install the dependencies and start the server
 
 ```
   cd shoe-store-client
@@ -55,7 +56,7 @@
   npm start
 ```
 
-3. In the subfolder of server, install the dependencies and start the server
+5. In the subfolder of server, install the dependencies and start the server
 
 ```
   cd shoe-store-server
@@ -64,7 +65,7 @@
   rails s
 ```
 
-4. If the browser doesn't open automatically, open your browser in the page below:
+6. If the browser doesn't open automatically, open your browser in the page below:
 
 ```
   localhost:3001
@@ -74,6 +75,18 @@
 
 ## Screenshots/Videos
 
+[Full Navigation - Loom Video](https://www.loom.com/share/29b82a5acde74ab191e7eb6ea3581fa8)
+
+<img width="400" height="200" src="https://cdn.loom.com/images/originals/955d5303909d4798a06f975502ec0ab6.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4ubG9vbS5jb20vaW1hZ2VzL29yaWdpbmFscy85NTVkNTMwMzkwOWQ0Nzk4YTA2Zjk3NTUwMmVjMGFiNi5qcGciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2NjEzOTY0MjJ9fX1dfQ__&Key-Pair-Id=APKAJQIC5BGSW7XXK7FQ&Signature=jL3Wg0QCTrLYcKOqXsvq5YjExV6qtKI-Vu7CcnVq9omhizbiHOQH9pEMQbUyU6SHbSXloq00nD8JjibJlcL9PFfy3xRbsLQU8%7EjGmtUog8c2zFU9WnLkIEOSvqkbTAY9fXeNzyyPy2bS--OM2OybHLHLn9DEikDGO-HGDiO9mgl0bcMWa407640iIOq2le5VD3KpX8AKchCypn-NVnJZ5YV-9lKscKPfn4PheVbEt09HtlO%7EuQkXK-g6y2O6Uz6%7ER8touoCtEQ%7EgsPSVvlPN67LyS044jCqePxc8PC8zFNBvW4y9WKBPWbY7-aG-XN6mB4TFMh0rQJNJakUfK8lQcA__)">
+
+<img width="400" height="200" src="https://cdn.loom.com/images/originals/c334fb06ce794a01a92da1449da004fe.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4ubG9vbS5jb20vaW1hZ2VzL29yaWdpbmFscy9jMzM0ZmIwNmNlNzk0YTAxYTkyZGExNDQ5ZGEwMDRmZS5qcGciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2NjEzOTYzOTh9fX1dfQ__&Key-Pair-Id=APKAJQIC5BGSW7XXK7FQ&Signature=hS1vlbNC6jay4jrnxJ71K1Zvd-oHkSHgxubVMeYjM9DqnCap236K9cAHDPYGZfaquLwjyDN6i9eeadoR1b2BgZP2kE51EtBmQNfnDTrFlKEAIZxax7Ev9b-CtGay-LmZ8h2-mZkCltO7NcyLXLp1hgRZsIKFrOsNWxbS7rgpE-MU5UoPY3SUIlbJVPtcNTr4RYePi95kO6kS3IDH1pr5NnFi7%7EnvirM2vMavxarRvwI6zsTKeqJhNo-%7EnfC9KD41td2yr2N14W9KdIJGU2ogXpU4dagGN6bpHNj7VA89Z%7EfD7MAEB2k-%7EJjhDON%7EwenmB4umWQK7wBaBujXTQsxpRQ__)">
+
+<img width="400" height="200" src="https://cdn.loom.com/images/originals/f3f3ab61310147d2b99f8f58c08491e5.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4ubG9vbS5jb20vaW1hZ2VzL29yaWdpbmFscy9mM2YzYWI2MTMxMDE0N2QyYjk5ZjhmNThjMDg0OTFlNS5qcGciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2NjEzOTY0OTJ9fX1dfQ__&Key-Pair-Id=APKAJQIC5BGSW7XXK7FQ&Signature=ti419tpj6AhhY8KOQs4qmqMZF6vu0q9yPjtoPI8eUFCdyONkD00R04mXGZW%7E-2gM7rK8n%7EcjZtLw3QZ6pgOzqIGaYeMVxRuoQoMfgKldmeiiKougaWg7KSImFN2BQhGQYs8Rs%7EwDQSdnUjmUprKx8%7Ew6x3gsbFOlC1Acv%7EW%7EM9YUEBtKZPKBWOWbYuCYPq9tdQZbTebZBMoPBHfzWF6dODGeMTLSaByxaKW2jJxH11iQ-Ei9NQmJep18j1-Kej4wKfuMilXXzJetmPo6IJzusj0VMAmRoT2F1FoeKZPSM%7E3tRBdZAih3NlyrI7gUzweNX8Qtv-B-eU7Mr9uULJ8VTw__)">
+
+<img width="400" height="200" src="https://cdn.loom.com/images/originals/7d40acab3a854e7891e8171e4d6599ba.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4ubG9vbS5jb20vaW1hZ2VzL29yaWdpbmFscy83ZDQwYWNhYjNhODU0ZTc4OTFlODE3MWU0ZDY1OTliYS5qcGciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2NjEzOTY1NDJ9fX1dfQ__&Key-Pair-Id=APKAJQIC5BGSW7XXK7FQ&Signature=IdFL4v720IMsSRkQyAwU4VmvL9zezgTxxlUhT82SaJ9oNCC5cHG9CxMijHdXsrjHHmTyh4VZoYJXwPQOYukFn3eNepr1zazBfnzZm3GeBzux2a4yi4dwiEK7vo%7EKtu7wkq0ekz%7EuBuTpfYq86%7ETv3e6yFiVfms89aNIIwxVhM0krYU9ZV6V%7EXrHZD0jIkVoIdZB2hZMK5mHzoNrs3KYcbsniyOd%7EsAIK5iEoteVWslRmPjtwo3wCPshSHIzB7Svc-DFbFrDmX5BkxQhTIAcjEbrO7zP3diMS8iH6-d8iOo%7ENpXMBagtz6WRTGgcq%7E0dFwg3mppWYYeMoA6Ixv-qWJg__)">
+
+<img width="400" height="200" src="https://cdn.loom.com/images/originals/596ec6695df24ef1ae4c556e6d2357e2.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4ubG9vbS5jb20vaW1hZ2VzL29yaWdpbmFscy81OTZlYzY2OTVkZjI0ZWYxYWU0YzU1NmU2ZDIzNTdlMi5qcGciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2NjEzOTY1Nzh9fX1dfQ__&Key-Pair-Id=APKAJQIC5BGSW7XXK7FQ&Signature=Ab3CelZ5H1nLWXObfM1EMCMFnlPM0EEiOQnYrW177fXVKvt6L1Da9Z9yLQ4%7ELktrqKyso6Xe5vXcNuWIls-n8lz9%7EoGAYmivLZOs1m1C9ZDVCWAW3FbrE1JKAqNXMp1cnCRJ8PJ%7EKVpV231htELu-Ke124Pkm-kkqqsRLwNO-95ENPU2Uyqiw8QOBX9WnWrPYLTqSD6Mnjdne25B0lWEO2LBw%7E%7EuKBAcDzXdzjxEnrEGF1r7eQKd60Khu8LSmY7bjHTRXGD1BPgjMsHZjMOcwNStYE2xooJJ5I6X9mLvgensY6l2TAUqh30p4oq-1wgO8urmXd7XDIPHJmCBIEyBPg__)">
+
 <br />
 
 ## Future improvements
@@ -81,12 +94,15 @@
 ### Tech side
 
 - Setup project in a docker structure to get easier to manage environments, scale, and setup cross-env.
+- Setup a better scale process for syncing inventory suggestions data.
 - Setup advanced generic UI components to make maintenance and A/B tests easier.
 - Transfer the box styling of Material UI from JSX into style files in a styled-components structure.
 - Unit & Integrations testing.
 
 ### Product side
 
+- Include search in the Dashboard page, searching for content types.
+- Include search in the Stores & Models pages, searching for general data.
 - Include an option for the user to switch between tables and cards in the stores & products views.
 - The totalizers in the Dashboard(like sales amount, total stores) shall show secondary information, which displays how much the information increased or decreased in the latest minutes.
 - Apply animations on the initial dashboard render by not displaying all data at once, resulting in better UX.
