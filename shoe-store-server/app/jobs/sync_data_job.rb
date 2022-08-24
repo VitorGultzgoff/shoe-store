@@ -41,14 +41,14 @@ class SyncDataJob < ApplicationJob
             end
           end
 
-          # Sync the suggestions according to the updated inventories
-          all_suggestions = ProductInventorySuggestion.all
-          for actual_suggestion in all_suggestions
-            actual_suggestion_source_amount = ProductInventory.find(actual_suggestion["inv_sugg_src_id"])["amount"]
-            actual_suggestion_target_amount = ProductInventory.find(actual_suggestion["inv_sugg_target_id"])["amount"]
-            if actual_suggestion_target_amount > 30 || actual_suggestion_source_amount <=70
-              actual_suggestion.destroy
-            end
+          ## Remove suggestions with updated inventory
+          inventory_suggestions_source_with_not_high_inv = ProductInventorySuggestion.joins("INNER JOIN product_inventories ON product_inventories.id = product_inventory_suggestions.inv_sugg_src_id").where("product_inventories.amount <= 70")
+          inventory_suggestions_target_with_not_low_inv = ProductInventorySuggestion.joins("INNER JOIN product_inventories ON product_inventories.id = product_inventory_suggestions.inv_sugg_target_id").where("product_inventories.amount > 30")
+          if inventory_suggestions_source_with_not_high_inv
+            inventory_suggestions_source_with_not_high_inv.delete_all
+          end
+          if inventory_suggestions_target_with_not_low_inv
+            inventory_suggestions_target_with_not_low_inv.delete_all
           end
 
         end
