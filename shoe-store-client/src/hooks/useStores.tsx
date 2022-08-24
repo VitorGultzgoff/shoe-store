@@ -48,7 +48,9 @@ const UseStoresProvider: React.FC<IUseStoresProviderProps> = ({ children }) => {
     data: storesData,
     startPolling: startPollingStoresData,
     stopPolling: stopPollingStoresData,
-  } = useQuery(GET_ALL_STORE_VIEW);
+  } = useQuery(GET_ALL_STORE_VIEW, {
+    onCompleted: () => setUpdatedTime(new Date()),
+  });
 
   const {
     loading: loadingStoreDetailsData,
@@ -57,11 +59,8 @@ const UseStoresProvider: React.FC<IUseStoresProviderProps> = ({ children }) => {
     stopPolling: stopPollingStoreDetailsData,
   } = useQuery(GET_STORE_DATA_BY_ID, {
     variables: { store_id: actualStoreId },
+    onCompleted: () => setUpdatedTime(new Date()),
   });
-
-  useEffect(() => {
-    setUpdatedTime(new Date());
-  }, [storesData, storeDetailsData]);
 
   const value = useMemo(
     () => ({

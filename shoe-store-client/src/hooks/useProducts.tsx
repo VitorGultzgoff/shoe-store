@@ -63,7 +63,9 @@ const UseProductsProvider: React.FC<IUseProductsProviderProps> = ({
     data: productsData,
     startPolling: startPollingProductsData,
     stopPolling: stopPollingProductsData,
-  } = useQuery(GET_ALL_PRODUCT_VIEW);
+  } = useQuery(GET_ALL_PRODUCT_VIEW, {
+    onCompleted: () => setUpdatedTime(new Date()),
+  });
 
   const {
     loading: loadingProductDetailsData,
@@ -72,6 +74,7 @@ const UseProductsProvider: React.FC<IUseProductsProviderProps> = ({
     stopPolling: stopPollingProductDetailsData,
   } = useQuery(GET_PRODUCT_DATA_BY_ID, {
     variables: { product_id: actualProductId },
+    onCompleted: () => setUpdatedTime(new Date()),
   });
 
   const {
@@ -79,11 +82,9 @@ const UseProductsProvider: React.FC<IUseProductsProviderProps> = ({
     data: productSuggestionsData,
     startPolling: startPollingProductSuggestionsData,
     stopPolling: stopPollingProductSuggestionsData,
-  } = useQuery(GET_PRODUCT_INVENTORY_SUGGESTIONS);
-
-  useEffect(() => {
-    setUpdatedTime(new Date());
-  }, [productsData, productDetailsData, productSuggestionsData]);
+  } = useQuery(GET_PRODUCT_INVENTORY_SUGGESTIONS, {
+    onCompleted: () => setUpdatedTime(new Date()),
+  });
 
   const value = useMemo(
     () => ({
