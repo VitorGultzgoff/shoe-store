@@ -20,8 +20,6 @@
 - [Sidekiq](https://github.com/mperham/sidekiq)
 - [Redis](https://redis.io/)
 
-<br />
-
 ## Requirements
 
 - [NodeJS & NPM](https://nodejs.org/en/)
